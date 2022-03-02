@@ -34,7 +34,7 @@ export default function Create() {
         <br />
         <Button
           variant='contained'
-          color='primary'
+          color='secondary'
           endIcon={<ArrowRightOutlined />}
           onClick={() => console.log('you clicked me.')}
         >
