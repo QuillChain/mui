@@ -1,5 +1,7 @@
 import React from 'react'
 import { Typography, Button, ButtonGroup, Container } from '@material-ui/core'
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
+import SendIcon from '@mui/icons-material/Send';
 
 export default function Notes() {
   return (
@@ -18,6 +20,7 @@ export default function Notes() {
           variant='contained'
           color='secondary'
           onClick={() => { console.log('you click me?') }}
+          startIcon= {<SendIcon/>}
         >
           click me
         </Button>
