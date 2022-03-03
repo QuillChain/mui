@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Button, ButtonGroup, Container } from '@material-ui/core'
+import { Typography, Button, ButtonGroup, Container, TextField } from '@material-ui/core'
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import SendIcon from '@mui/icons-material/Send';
 
@@ -16,6 +16,13 @@ export default function Notes() {
         >
           Note Here
         </Typography>
+        <br/>
+
+        <form noValidate autoComplete='off'>
+          <TextField placeholder='...'/>
+        </form>
+        
+        <br/>
         <Button
           variant='contained'
           color='secondary'
