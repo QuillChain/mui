@@ -1,46 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+
 import { Typography, Button, ButtonGroup, Container, TextField } from '@material-ui/core'
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import SendIcon from '@mui/icons-material/Send';
+import './Notes.css'
+
+
 
 export default function Notes() {
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/notes')
+      .then(res => res.json())
+      .then(data => setNotes(data))
+  }, [])
+  console.log(notes)
   return (
     <div>
-      <Container>
+      <Container className='container' >
+        <Grid container spacing={2}>
 
-        <Typography
-          variant='h6'
-          color='textSecondary'
-          component='h2'
-          gutterBottom
-        >
-          Note Here
-        </Typography>
-        <br/>
-
-        <form noValidate autoComplete='off'>
-          <TextField placeholder='...'/>
-        </form>
-        
-        <br/>
-        <Button
-          variant='contained'
-          color='secondary'
-          onClick={() => { console.log('you click me?') }}
-          startIcon= {<SendIcon/>}
-        >
-          click me
-        </Button>
-        <br />
-        <br />
-        <ButtonGroup
-          variant='contained'
-          color='primary'
-        >
-          <Button>one</Button>
-          <Button>two</Button>
-          <Button>three</Button>
-        </ButtonGroup>
+          {notes.map(note => (
+            <Grid item key={note.id} xs={12} sm={6} md={4} lg={2} >
+              <Paper elevation={8}>
+                {note.title}
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
       </Container>
     </div>
   )

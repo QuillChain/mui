@@ -2,9 +2,14 @@ import { TextField, Button, Container, Typography, makeStyles } from '@material-
 import { ArrowBackOutlined, ArrowRightOutlined, Block, ClassRounded } from '@mui/icons-material'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl'
+
 import React from 'react'
+
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles({
   btn: {
     fontSize: 60,
@@ -20,12 +25,13 @@ const useStyles = makeStyles({
   field: {
     marginTop: 20,
     marginBottom: 20,
-    display: 'block',
+    display: 'block'
   }
 }
 )
 
 export default function Create() {
+  const history = useHistory();
   const classes = useStyles();
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
@@ -39,13 +45,16 @@ export default function Create() {
 
     e.preventDefault()
     if (title && details) {
-
-      console.log(title, details, category)
+      fetch('http://localhost:8000/notes',{
+        method: 'POST',
+        headers: {'content-type':'application/json' },
+        body: JSON.stringify({title,details,category})
+      }).then(()=>history.push('/'))
     }
   }
   return (
     <div>
-      <Container>
+      <Container className='container'>
 
         <Typography
           variant='h6'
@@ -78,15 +87,17 @@ export default function Create() {
             rows={5}
             error={detailsError}
           />
-          
-          <RadioGroup value={category} onChange={(e)=>setCategory(e.target.value)}>
-            <FormControlLabel control={<Radio/>} value='money' label='money' />
-            <FormControlLabel control={<Radio/>} value='work' label='work' />
-            <FormControlLabel control={<Radio/>} value='todos' label='todos' />
-            <FormControlLabel control={<Radio/>} value='reminders' label='reminders' />
-          </RadioGroup>
-          
+          <FormControl className={classes.field}>
+            <FormLabel>Category</FormLabel>
+            <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
+              <FormControlLabel control={<Radio />} value='money' label='money' />
+              <FormControlLabel control={<Radio />} value='work' label='work' />
+              <FormControlLabel control={<Radio />} value='todos' label='todos' />
+              <FormControlLabel control={<Radio />} value='reminders' label='reminders' />
+            </RadioGroup>
+          </FormControl>
 
+          <br/>
           <Button
             variant='contained'
             color='secondary'
