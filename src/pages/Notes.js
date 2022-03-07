@@ -7,6 +7,7 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight'
 import SendIcon from '@mui/icons-material/Send';
 import './Notes.css'
 import NoteCard from '../Component/NoteCard';
+import Layout from '../Component/Layout';
 
 
 
@@ -29,7 +30,8 @@ export default function Notes() {
 
   return (
     <div>
-      <Container className='container' >
+      <Container className='container'>
+
         <Grid container spacing={2}>
 
           {notes.map(note => (
@@ -40,6 +42,7 @@ export default function Notes() {
             </Grid>
           ))}
         </Grid>
+
       </Container>
     </div>
   )
